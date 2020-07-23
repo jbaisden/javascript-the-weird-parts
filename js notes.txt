@@ -1,0 +1,85 @@
+base execution context
+
+global execution context:
+* creates a global object
+* creates the 'this' variable
+
+global in js means code/variables not inside a function
+
+This works by the said variables/functions created outside of functions get attached
+to the global object 'this', which seems to default to refering to the 'window' object 
+when run in a browser
+
+
+Execution Context wraps the code that's being run such that the javascript engine may make inferences about how to and in what order things are run. 
+
+Execution Context has 2 phases: 
+1) Creation phase where Hoisting takes place
+2) Execution phase where code is executed line by line 
+
+Part of the Execution Context is an Outer Environment. Inside of functions, this refers 
+to the global Execution Context. If function b is declared inside function a, a will be b's Outer Environment with the global Execution Context being a's. This Outer Environment depends on where the function sits lexically.
+
+Another way of answering where/whom does the Outer Environment point to is to answer the question 'Who created me?'
+
+Hoisting - the process of setting aside memory for function & variable declarations within the execution context. Variables used before being assigned a value will be defaulted to undefined. NOTE: This process does not physically move the variable/function declarations to the top of the file.
+
+Note: never set variable values to undefined yourself otherwise you won't be able to track if a variable wasn't provided a value of undefined or if it's the value you set somewhere in the code.
+
+var test = undefined;
+console.log(test); //undefined
+console.log(test == undefined); //true
+console.log(test === undefined); //true
+console.log(test == 'undefined'); //false
+console.log(test === 'undefined'); //false
+
+
+Single Threaded - one command is executed at a time 
+Synchronous - one at a time & in order 
+
+FUNCTION INVOCATION & THE EXECUTION STACK
+
+Every function executed creates a new Execution Context and adds it to the Execution Stack. It's literally a stack structure: LAST IN FIRST OUT
+
+VARIABLE ENVIRONMENT a.k.a SCOPE - refers to where the variables live / are available in code 
+
+THE SCOPE CHAIN 
+
+let - allows the js engine to use block scoping 
+
+ASYNCHRONOUS - MORE THAN ONE AT A TIME
+
+Outside of the JS Engine exists an Event Queue. Clicks, Http Requests, etc are added here. The JS engine will periodically check the Event Queue when the global execution context stack is empty. This process of checking the Event Queue is called the Event Loop.
+
+In actuality, it's the browser that is asynchronous and not the js engine.
+
+SECTION 3 - TYPES & OPERATORS
+
+JS uses dynamic typing.
+
+Primative type - type that represents a single value (not an object).
+* undefined 
+* number (floating point)
+* string
+* boolean
+* null
+* symbol - used in ES6. Not fully supported by all browsers.
+
+OPERATORS - A special function that is syntactically (written) differently
+INFIX notation - where the function name sits between the two operands
+
+OPERATOR PRECEDENCE - which operator is called first when multiple are on the same line of code.
+OPERATOR ASSOCIATIVITY - what order the operator gets called (left to right or right to left) when operators have the same precedence.
+
+= operator's associativity is right to left.
+var a = 2, b= 3, c = 4;
+a = b = c;   //a & b & c are all equal to 4
+
+Also note that the assignment b = c actually resolves by returning a value after assigning 
+c's value to b & then returns the value of b, which is 4, so we then get a = 4;
+
+a = b = c = 4; // c set to 4 & result returned
+a = b = 4; // b set to 4 & result returned
+a = 4; // a set to 4
+
+
