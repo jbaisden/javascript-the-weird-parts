@@ -1,17 +1,24 @@
-// short hand for creating a new object
-var tony = {
-    firstname: 'Tony',
-    lastname: 'Alicea',
-    address: {
-        street: '111 main st.',
-        city: 'New York'
+function greet(firstname, lastname, language, ...other) {
+    language = language || 'en';
+    if( language === 'en') {
+        console.log('Hello ' + firstname + ' ' + lastname);
     }
-};
-greet(tony);
-
-function greet(person) {
-    console.log('Hi ' + person.firstname);
+        
+    if( language === 'es') {
+        console.log('Holla ' + firstname + ' ' + lastname);
+    }
 }
-greet.language = 'english';
-console.log(greet); //prints code of greet
-console.log(greet.language);
+
+function greetEnglish(firstname, lastname) {
+    greet(firstname, lastname, 'en');
+}
+
+function greetSpanish(firstname, lastname) {
+    greet(firstname, lastname, 'es');
+}
+
+greetEnglish('jason','baisden');
+greetSpanish('jason','baisden');
+
+
+

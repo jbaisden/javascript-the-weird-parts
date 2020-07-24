@@ -207,3 +207,151 @@ console.log(greet.language);
 
 
 FUNCTION STATEMENT AND FUNCTION EXPRESSIONS 
+
+Expression - unit of code that results in a value.
+
+Note - the following causes an error: 
+
+anonymousGreet();
+
+var anonymousGreet = function() {
+    console.log('hi');
+}
+
+This is because anonymousGreet gets hoisted and initialized with undefined. Then the "()" tries to invoke
+undefined, but undefined is not a function so it errors.
+
+BY VALUE VS BY REFERENCE
+
+* Primative values will be copied (by value)
+* Object values will be stored as references (by reference)
+
+
+// ALL PRIMATIVES ARE BY VALUE (EVEN FUNCTION PARAMETERS)
+var a = 3;
+var b = 4;
+b = a;
+a = 2;
+console.log(b);
+console.log(a);
+
+// ALL OBJECTS ARE BY REFERENCE (EVEN FUNCTION PARAMETERS)
+
+var c = { greeting: 'hi'};
+var d;
+d = c; //d now points to the same memory location as d
+c.greeting = 'hello'; //mutate object in memory location pointed to by both c and d
+console.log(c);
+console.log(d);
+
+OBJECTS, FUNCTIONS, 'this'
+
+* Remember when a function is invoked, a new execution context is created and put onto the execution stack 
+
+var c = {
+    name: 'The c object',
+    log: function() {
+        console.log(this);
+    }
+}
+
+c.log();
+
+Here the 'this' keyword points to the object that contained the method where 
+'this' was used rather than the global window object.
+
+When the function invoke is a method of an object, the this keyword will point to the object; however, if another method is created inside the object method, the this keyword will point to 
+the global object. This is f'd up for sure.
+
+Solution: inside the object's primary method (the one assigned to a name), set 
+
+var that/self = this; and use that/self in any children methods.
+
+var c = {
+    name: 'The c object',
+    log: function() {
+        var self = this;
+        self.name = 'updated c object';
+        console.log(this);
+
+        var setname = function(newname) {
+            self.name = newname;
+        }
+
+        setname('updated again! the c object');
+        console.log(this);
+    }
+}
+
+c.log();
+
+ARRAYS & COLLECTIONS
+
+* arrays can hold anything
+
+'arguments' AND SPREAD
+
+'arguments' contains an array like structure of all parameters passed to a function. 
+It's array like because it doesn't exactly have all the features of an array.
+
+function greet(firstname, lastname, language, ...other) {
+    // console.log(arguments);
+    console.log('----------------------------------');
+    console.log(firstname);
+    console.log(lastname);
+    console.log(language);
+
+    //other contains all remaining parameters passed in. It could just replace the
+    //whole parameter list with other.
+    console.log(other);
+}
+
+greet();
+greet("jason");
+greet("jason","baisden");
+greet("jason","baisden", 'en', 'extra extra read all about it ');
+
+FUNCTION OVERLOADING
+
+Javascript doesn't have function overloading. This ties into the above section regarding
+function arguments and how javascript handles them. See below for a pattern to mimic 
+a sort of function overloading that's more succinct.
+
+function greet(firstname, lastname, language, ...other) {
+    language = language || 'en';
+    if( language === 'en') {
+        console.log('Hello ' + firstname + ' ' + lastname);
+    }
+        
+    if( language === 'es') {
+        console.log('Holla ' + firstname + ' ' + lastname);
+    }
+}
+
+function greetEnglish(firstname, lastname) {
+    greet(firstname, lastname, 'en');
+}
+
+function greetSpanish(firstname, lastname) {
+    greet(firstname, lastname, 'es');
+}
+
+greetEnglish('jason','baisden');
+greetSpanish('jason','baisden');
+
+SYNTAX PARSERS
+
+AUTOMATIC SEMI-COLON INSERTION
+
+Exactly what it says. The JS engine will put ';' in code where it thinks they belong.
+
+Moral: PUT YOUR OWN SEMI-COLONS on your lines. Never have a line with 'Return' and no 
+continuation character like '{
+
+WHITESPACE
+
+Javascript allows liberal use of whitespace
+
+IMMEDIATELY INVOKED FUNCTION EXPRESSIONS (IFFE)S
+
+
