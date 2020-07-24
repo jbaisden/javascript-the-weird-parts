@@ -1,20 +1,17 @@
-var a = "hello world";
-var myVar = 1;
-
-
-function b() {
-    myVar = 2;
-    console.log(myVar);
-    console.log(this);
-    function f1() {
-        myVar = 3;
-        console.log(f1);
+// short hand for creating a new object
+var tony = {
+    firstname: 'Tony',
+    lastname: 'Alicea',
+    address: {
+        street: '111 main st.',
+        city: 'New York'
     }
+};
+greet(tony);
 
-    f1();
-
+function greet(person) {
+    console.log('Hi ' + person.firstname);
 }
-
-b();
-
-
+greet.language = 'english';
+console.log(greet); //prints code of greet
+console.log(greet.language);

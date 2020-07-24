@@ -83,3 +83,127 @@ a = b = 4; // b set to 4 & result returned
 a = 4; // a set to 4
 
 
+COERCION: CONVERTING THE VALUE FROM ONE TYPE TO ANOTHER
+
+var a = 1 + '2'; //prints 12
+
+The === will not perform type coercion in comparisons and this is best practice.
+
+See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness
+
+CHECKING EXISTING WITH TYPE COERCION
+
+var a;
+a = null; // if(a) is false
+a = undefined; // if(a) is false
+a = 0; // if(a) is false
+
+
+DEFAULT VALUES
+
+Functions can be called w/o parameter values. If so, the parameters have their value set to undefined.
+
+function greet(name) {
+	name = name || '<Your name here>';  // provides default value b/c undefined resolves to false
+	console.log('Hello ' + name);
+}
+
+greet('Tony');
+greet();
+
+SECTION 4 Functions & Objects
+
+
+//Note using new Object() is not preferred.
+var person = new Object();
+
+person.lastname = "lastname";
+person["firstname"]= "tony";
+
+var firstNameProperty = "firstname";
+
+person.address = new Object();
+person.address.street = "111 main st.";
+console.log(person);
+console.log(person[firstNameProperty]);
+console.log(person.firstname);
+
+//Note using dot "." operator IS preferred.
+console.log(person["address"]["street"]);
+
+OBJECTS AND OBJECT LITERALS
+
+// short hand for creating a new object
+//OBJECT LITERAL SYNTAX
+var tony = {
+    firstname: 'Tony',
+    lastname: 'Alicea',
+    address: {
+        street: '111 main st.',
+        city: 'New York'
+    }
+};
+
+function greet(person) {
+    console.log('Hi ' + person.firstname);
+}
+
+greet(tony);
+
+greet( {firstname: 'Jason', lastname: 'baisden'});
+
+FAKING NAMESPACES
+
+var greet = 'Hello';
+var greet = 'Hola';
+
+//prints Hola.
+console.log(greet);
+
+//fake namespace
+var english = {};
+var spanish = {};
+
+english.greet = 'Hello';
+spanish.greet = 'Hola!';
+
+console.log(english);
+
+JSON AND OBJECT LITERALS
+
+All json is valid js object literal syntax 
+Not all object literal syntax is valid json
+use JSON.stringify(obj) to convert an object to a json string 
+use JSON.parse(jsonString) to convert a json string to a js object 
+
+var objectLiteral = {
+    firstname: 'Mary',
+    isAProgrammer: true
+}
+
+console.log(JSON.stringify(objectLiteral));
+
+var jsonValue = (JSON.parse(JSON.stringify(objectLiteral)));
+
+/*{
+    "firstname": 'Mary',
+    "isAProgrammer": true
+}*/
+
+console.log(objectLiteral);
+
+FUNCTIONS ARE OBJECTS & first class citizens in js 
+
+First class functions - everything you can do with other types you can do with functions.
+You can attach primitives, objects, and even functions to functions. Functions even have a 
+'Code' property that contains the actual code within the function. 
+
+function greet(person) {
+    console.log('Hi ' + person.firstname);
+}
+greet.language = 'english'; // sets property of the greet object which just happens to be a function
+console.log(greet); //prints code of greet
+console.log(greet.language);
+
+
+FUNCTION STATEMENT AND FUNCTION EXPRESSIONS 
