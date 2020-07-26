@@ -512,4 +512,48 @@ the proto obj. This will keep going down the chain until all proto objects
 have been searched or the property is found.
 
 
+EVERYTHING IS AN OBJECT (OR A PRIMITIVE)
+
+
+At the end of the __proto__ chain is always an object. It's through this __proto__
+object that javascripot implements it's inheritance. Recall that call, apply, bind 
+can be applied to all objects. They're implemented in javascripts base 'object' type.
+Methods like push, pop, slice, etc of an array are implemented through this same object
+__proto__ chain with the Array itself being an object that implements these methods. The same
+goes for all actual types in javascript (number, string, null, undefined, boolean, etc)
+
+NOTE: NICE PAGE WITH JS CHEATSHEETS https://blog.templatetoaster.com/javascript-cheat-sheet/
+
+REFLECTION AND EXTEND
+
+Reflection - an object can look at itself, listing and changing its properties
+and methods.
+
+Lesson reviewed how underscore.js has an _.extend(obj, obj2, obj3, etc) method
+that will extend obj with all the properties and methods of the additional objects
+passed into it. This highlighted the importance and strength of reflection in javascript.
+
+basic reflection example: 
+
+var person = {
+    firstname: 'default',
+    lastname: 'default',
+    getfullName: function() {
+        return this.firstname + ' ' + this.lastname;
+    }
+}
+
+var john = {
+    firstname: 'John',
+    lastname: 'Doe'
+}
+
+// DON'T DO THIS EVER - FOR DEMO PURPOSES ONLY!
+john.__proto__ = person;
+
+for(var prop in john) {
+    if(john.hasOwnProperty(prop)) {
+        console.log(prop + ': ' + john[prop]);
+    }
+}
 
