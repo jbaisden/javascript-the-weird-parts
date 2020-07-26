@@ -354,4 +354,162 @@ Javascript allows liberal use of whitespace
 
 IMMEDIATELY INVOKED FUNCTION EXPRESSIONS (IFFE)S
 
+var greeting = function(name) {
+     console.log('Hello' + name);
+}('IIFE');
+
+(function(name) {
+    console.log('Hello' + name);
+})();
+
+
+IIFES AND SAFE CODE =
+
+Lots of libraries will initialize their library via an IIFE because it won't collide 
+against the global object or other libraries. If the global environment needs to be accessed,
+it can be passed as a parameter to the IIFE. 
+
+UNDERSTANDING CLOSURES
+
+function greet(whattosay) {
+    return function(name) {
+        console.log(whattosay + ' ' + name);
+    }
+}
+
+var sayHi = greet('hi');
+
+//B/c of closures, when sayHi is invoked, the prior parameter 'hi' was kept
+//in the variable scope. Also see note in lecture about this point. Good graphic to illustrate this.
+sayHi('Jason');
+
+UNDERSTANDING CLOSURE PART 2 
+
+function buildFunctions() {
+    var arr = [];
+
+    for(var i = 0; i < 3; i++) {
+        arr.push(
+            //Note the function is not executed here. The loop will finish and i will be set to 3 when it does.
+            function() {
+                console.log(i);
+            }
+        )
+    }
+
+    return arr;
+}
+
+function buildFunctions2() {
+    var arr = [];
+
+    for(var i = 0; i < 3; i++) {
+        //es6 'let' keyword scopes the value to the current execution block (curly braces)
+        //so each time the loop is run a new variable is created in memory
+        let j = i; 
+        arr.push(
+            //Note the function is not executed here. The loop will finish and i will be set to 3 when it does.
+            function() {
+                console.log(j);
+            }
+        )
+    }
+
+    return arr;
+}
+
+//How to do this prior to es6....with IIFE
+function buildFunctions3() {
+    var arr = [];
+
+    for(var i = 0; i < 3; i++) {
+        arr.push(
+            (function(j) {
+                return function() {
+                    console.log(j);
+                }
+            }(i))
+        )
+    }
+
+    return arr;
+}
+
+
+var fs = buildFunctions();
+var fs2 = buildFunctions2();
+var fs3 = buildFunctions3();
+
+fs3[0](); // prints 0
+fs3[1](); // prints 1 
+fs3[2](); // prints 2 
+
+fs[0](); // prints 3 
+fs[1](); // prints 3 
+fs[2](); // prints 3 
+
+
+fs2[0](); // prints 0
+fs2[1](); // prints 1
+fs2[2](); // prints 2
+
+FUNCTION FACTORIES 
+
+Good graphic of function factories and using closures. The main function takes a 
+parameter as a toggle to determine the functionality the closed 
+in function will return. This closed in function takes it's own parameters.
+
+CLOSURES AND CALLBACKS
+
+Callback - function you give to another function to be executed when it's finsihed.
+
+CALL, APPLY, BIND
+
+bind - method available to functions. Returns a copy of the function with the 'this' keyword bound to the first
+parameter passed such that when 'this' is used within the function, it will references the passed in object. 
+The second paraemter can be an array of values to be passed as arguments to the function. The 'bind' keyword 
+DOES NOT EXECUTE the function.
+
+call - does much the same as the bind function where the 'this' keyword is bound to the first parameter. Multiple parameters
+may be passed in separated by  commas. The difference here is that the function is executed outright.
+
+apply - does the same as call, but the 2nd parameter must be an array
+
+Function Currying - creating a copy of a function that has some default parameters.
+
+see call_apply_bind.js
+
+FUNCTIONAL PROGRAMMING 
+
+FUNCTION PROGRAMMING PART 2 
+
+These libraries are a good education in javascript in the real world. 
+
+See annotated Underscore.js 
+
+also lodash
+
+
+
+OBJECT-ORIENTED JAVASCRIPT AND PROTOTYPAL INHERITANCE
+
+CLASSICAL VS PROTOTYPAL INHERITANCE
+
+INHERITANCE - one object gets access to the properties and methods of another object
+
+classical refers to polymorphism and inheritance in a c# or java like sense
+    * interfaces
+    * abstract classes
+    * etc, etc 
+
+UNDERSTANDING THE PROTOTYPE 
+
+great graphic describing the prototype chain, which refers to an object having a 
+proto object which itself may have a proto object. Calling obj.prop1 will have 
+the engine looking on obj for prop1 one. If it's not found, it will look on 
+obj1's proto obj. If it's not found there, it will look on the proto obj of 
+the proto obj. This will keep going down the chain until all proto objects 
+have been searched or the property is found.
+
+
 

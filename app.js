@@ -1,24 +1,24 @@
-function greet(firstname, lastname, language, ...other) {
-    language = language || 'en';
-    if( language === 'en') {
-        console.log('Hello ' + firstname + ' ' + lastname);
-    }
-        
-    if( language === 'es') {
-        console.log('Holla ' + firstname + ' ' + lastname);
+var person = {
+    firstname: 'default',
+    lastname: 'default',
+    getfullName: function() {
+        return this.firstname + ' ' + this.lastname;
     }
 }
 
-function greetEnglish(firstname, lastname) {
-    greet(firstname, lastname, 'en');
+var john = {
+    firstname: 'John',
+    lastname: 'Doe'
 }
 
-function greetSpanish(firstname, lastname) {
-    greet(firstname, lastname, 'es');
+// DON'T DO THIS EVER - FOR DEMO PURPOSES ONLY!
+john.__proto__ = person;
+
+console.log(john.getfullName());
+console.log(john.firstname);
+
+var jane = {
+    firstname: 'Jane'
 }
-
-greetEnglish('jason','baisden');
-greetSpanish('jason','baisden');
-
-
-
+jane.__proto__ = person;
+console.log(jane.getfullName());
