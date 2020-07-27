@@ -557,3 +557,6 @@ for(var prop in john) {
     }
 }
 
+FUNCTION CONSTRUCTORS, 'new', & the history of Javascript
+
+//Note research 'class' keyword 
