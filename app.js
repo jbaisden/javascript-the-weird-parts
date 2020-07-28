@@ -1,9 +1,11 @@
-function Person() {
-    this.firstname = "Jane";
-    this.lastname = "Doe";
-}
 
-var john = new Person();
-
-console.log(john);
-console.log(Person);
+var people = [
+    {
+        firstname: 'john',
+        lastname: 'doe',
+        address: [
+            '111 Main street',
+            '222 Third street',
+        ]
+    }
+];

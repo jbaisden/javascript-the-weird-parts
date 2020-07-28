@@ -560,3 +560,121 @@ for(var prop in john) {
 FUNCTION CONSTRUCTORS, 'new', & the history of Javascript
 
 //Note research 'class' keyword 
+function constructor - normal function used to construct objects 
+
+function Person() {
+    let bob = 'bob';
+    this.firstname = "Jane";
+    this.lastname = "Doe";
+}
+
+//the 'new' operator creates a new object and sets its __proto__.constructor
+//value to the Person function
+var john = new Person();
+
+//this just makes a variable that points to the Person function object.
+var notPerson = Person;
+
+FUNCTION CONSTRUCTORS AND '.prototype'
+
+Doing something like:
+
+Person.prototype.getFullName = function() {
+    return this.firstname + ' ' + this.lastname;
+}
+
+adds the getFullName method to not just the Person object,
+but all instances of the Person object (yes, even already existing ones).
+
+DANGEROUS ASIDE 'new' and functions
+
+Note that function constructors are just functions. This means if you 
+omit the 'new' keyword when declaring a new object, you'll run into issues
+as the constructor itself doesn't return a value. This sets the variable
+you just initialized to undefined.
+
+var john = Person('John', 'Doe'); //john is undefined
+console.log(john.firstname); //property 'firstname' doesn't exist on undefined
+
+A good convention for function constructors is to Capitalize the first letter. Then
+when you're reviewing the code, you'll be able spot anywhere the 'new' keyword might
+be missing.
+
+CONCEPTUAL ASIDE BUILT-IN FUNCTION CONSTRUCTORS
+
+var a = new Number(3); //or new Number("3")
+var s = new String("blah");
+
+These statements don't return primatives; they return an object
+that has a property, [[PrimitiveValue]] which is primitive. The object
+__proto__ object points to String, which allows the object to inherit
+Number or String methods.
+
+also note that:
+
+var a = Number; 
+var a = String;
+
+These return function objects.
+
+Furthermore, this can be used to extend the methods on the based Javascript types
+through use of something like String.prototype.<methodName> = <anonymous function>
+
+DANGEROUS ASIDE - BUILT IN FUNCTION CONSTRUCTORS
+
+var a = 3;
+var b = new Number(3);
+a == b // true
+a === b //false ...a is a primitive, b is an object ...can't be equal
+
+DANGEROUS ASIDE ARRAYS for..in
+
+var arr = ['John', 'Jane', 'Jim'];
+
+//Avoid iterating arrays like this
+//indexes 0, 1, 2 are actually property names. 
+
+Array.prototype.myAwesomeProperty = 'something more';
+
+//so this loops over the array...and the property 'myAwesomeProperty'
+for (var prop in arr) {
+    console.log(prop + ': ' + arr[prop]);
+}
+
+OBJECT.create and PURE PROTOTYPAL INHERITANCE
+
+Object.create creates an empty object with the __proto__
+property set to the object passed to the create method.
+
+var person = {
+    firstname: 'Default',
+    lastname: 'Default',
+    greet: function() {
+        return 'Hi ' + this.firstname;
+    }
+}
+
+var john = Object.create(person);
+
+//This will hide the property values on the prototype
+john.firstname = 'John';
+john.lastname = 'Doe';
+
+console.log(john);
+
+ES6 AND CLASSES 
+
+google javascript's class keyword. At it's root, it's just syntactic
+sugar, but best to know how it works.
+
+SECTION 7
+
+INITIALIZATION
+
+'typeof', 'instanceof', FIGURING OUT WHAT SOMETHING IS
+
+use typeof for primitive checks and instanceof for
+checking against non-primitive
+
+STRICT MODE 
+
