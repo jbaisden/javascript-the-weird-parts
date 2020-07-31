@@ -52,8 +52,6 @@
         greet: function(formal) {
             var msg;
 
-            formal = !!formal;
-            console.log(formal);
 
             if(formal) {
                 msg = this.formalGreeting();
@@ -112,7 +110,7 @@
         self.firstname = firstname || 'John';
         self.lastname = lastname || 'Doe';
         self.language = language || 'en';
-        self.formal = formal ;
+        self.formal = (formal == 'true') ; //get an authentic bool value. Do not use Boolean or !!
         console.log(self.formal);
 
         self.validate();
