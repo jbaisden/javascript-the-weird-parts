@@ -1,11 +1,3 @@
 
-var people = [
-    {
-        firstname: 'john',
-        lastname: 'doe',
-        address: [
-            '111 Main street',
-            '222 Third street',
-        ]
-    }
-];
+var q = $("ul.people li");
+console.log(q);

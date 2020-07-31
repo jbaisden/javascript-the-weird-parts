@@ -678,3 +678,16 @@ checking against non-primitive
 
 STRICT MODE 
 
+LEARNING FROM OTHER'S GOOD CODE 
+
+Try github --> explore --> see all --> front-end javascript frameworks
+
+DEEP DIVE SOURCE CODE OF JQUERY 1...2...3
+
+method chaining - calling one method after another, and each method affects
+the parent object...pretty much a fluent api
+
+jquery does this internally by returning 'this' on the methods
+where this works, which i think is all of them.
+
+
