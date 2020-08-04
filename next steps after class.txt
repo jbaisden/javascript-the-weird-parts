@@ -1,0 +1,43 @@
+This is a summary of my thoughts on how to better cement the knowledge gained from this course.
+
+One major area the course did not cover was Javascript as it applies to the browser DOM. 
+This is exceedingly important as the whole end goal is to modify/locate elements within the 
+DOM. Hence:
+
+1) Find research on browser dom api and javascript examples
+
+The course reviewed bind, call, and apply rather well, but these functions are so ubiquitous
+that more exercises/study materials are needed. So,
+
+2) Locate as definitive but also as dense an example of possible detailing the usage of 
+bind, call, apply.
+
+Javascript's prototypal inheritance is so different than anything I've encountered in other languages
+that this concept bears repitition and constant practice. Of particular note is gaining mastery and 
+truly groking the following: 
+
+3) 
+    a) usage of the "new" operator and what it does on both sides of itself. I think the course mentioned
+    infix notation.
+    b) usage of Object.create(obj) and what the result of this is.
+    c) how a & b are different
+    d) when to use one approach over the other
+    e) I think the usage of 'extend' relates/applies to these concepts also
+
+4) The "new" es6 keywords and how they are used. Granted, these aren't new anymore, but still.
+    a) class
+    b) module
+    c) function constructors
+    d) let vs var
+    e) function currying
+    f) ... spread operator
+
+5) Review anotated source of underscore.js. The library was obviously created with an intent
+to teach others what is happening inside of it.
+
+6) review usage/differences of typeof and instanceof
+
+7) review the Greetr.js library created in this course. The paradigm used to initialize itself via the 
+IIFE (immediately invoked function expression) and how it works by not requiring the usage of the 'new' operator
+at all.
+

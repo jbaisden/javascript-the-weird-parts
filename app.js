@@ -6,6 +6,7 @@
 
 
 $(window).ready(function() {
+    
     $("#formalSelection").on('change',  function() {
         console.log("changing greeting. Formal?: " + $('#formalSelection option:selected').val());
         console.log( $('#formalSelection option:selected').val() );
