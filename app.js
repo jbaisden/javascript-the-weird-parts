@@ -6,7 +6,11 @@
 
 
 $(window).ready(function() {
-    
+
+
+    let button = { ele: document.querySelector("#clicker")};
+    console.log(button);
+
     $("#formalSelection").on('change',  function() {
         console.log("changing greeting. Formal?: " + $('#formalSelection option:selected').val());
         console.log( $('#formalSelection option:selected').val() );

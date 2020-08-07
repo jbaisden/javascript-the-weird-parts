@@ -41,3 +41,8 @@ to teach others what is happening inside of it.
 IIFE (immediately invoked function expression) and how it works by not requiring the usage of the 'new' operator
 at all.
 
+Other resources to look into:
+
+Eloquent JavaScript, 3rd Edition: A Modern Introduction to Programming Paperback – December 4, 2018
+https://www.amazon.com/Eloquent-JavaScript-3rd-Introduction-Programming/dp/1593279507/ref=pd_bxgy_2/137-4714064-0201030?_encoding=UTF8&pd_rd_i=1593279507&pd_rd_r=0b757dec-8830-4b01-a57e-c804f0b8b422&pd_rd_w=VAy14&pd_rd_wg=11UW9&pf_rd_p=ce6c479b-ef53-49a6-845b-bbbf35c28dd3&pf_rd_r=WS78CQF0YET79EQKSE1J&psc=1&refRID=WS78CQF0YET79EQKSE1J
+
